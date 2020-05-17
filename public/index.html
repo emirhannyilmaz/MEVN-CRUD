@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<a href="/" class="navbar-brand mx-auto">CRUD</a>
+	</nav>
+
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div id="app" class="card">
+					<div class="card-header">
+						<form>
+							<div v-if="!isUpdating">
+								<div class="form-group">
+									<input v-model="username" type="text" class="form-control" placeholder="Username" name="username">
+								</div>
+								<div class="form-group">
+									<input v-model="email" type="email" class="form-control" placeholder="E-mail" name="email">
+								</div>
+								<div class="form-group">
+									<input v-model="age" type="number" class="form-control" placeholder="Age" name="age">
+								</div>
+								<button v-on:click="create" type="submit" class="btn btn-success float-right">Create</button>
+							</div>
+							<div v-else>
+								<input v-model="id" type="hidden">
+								<div class="form-group">
+									<input v-model="username" type="text" class="form-control" placeholder="Username" name="username">
+								</div>
+								<div class="form-group">
+									<input v-model="email" type="email" class="form-control" placeholder="E-mail" name="email">
+								</div>
+								<div class="form-group">
+									<input v-model="age" type="number" class="form-control" placeholder="Age" name="age">
+								</div>
+
+								<button v-on:click="cancel" type="button" class="btn btn-danger float-right">Cancel</button>
+								<button v-on:click="update" type="submit" class="btn btn-success float-right mr-1">OK</button>
+							</div>
+						</form>
+					</div>
+					<div class="card-body">
+						<div class="row">
+						    <div class="col-12">
+						      	<table class="table table-bordered">
+						        	<thead>
+						          		<tr>
+						          			<th scope="col">ID</th>
+								            <th scope="col">Username</th>
+								            <th scope="col">E-mail</th>
+								            <th scope="col">Age</th>
+								            <th scope="col">Actions</th>
+						          		</tr>
+						        	</thead>
+						        	<tbody>
+							          	<tr v-for="u in users">
+							            	<th scope="row">{{u.id}}</th>
+							            	<td>{{u.username}}</td>
+							            	<td>{{u.email}}</td>
+							            	<td>{{u.age}}</td>
+							            	<td>
+							            		<form>
+								                	<button v-on:click="edit(u.id, u.username, u.email, u.age)" type="button" class="btn btn-success"><i class="fa fa-edit"></i></button>
+								                	<button v-on:click="del(u.id)" type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+								                </form>
+							            	</td>
+							          	</tr>
+						        	</tbody>
+						      	</table>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
